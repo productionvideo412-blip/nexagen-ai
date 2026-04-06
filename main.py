@@ -1,7 +1,12 @@
-from fastapi import FastAPI
+from flask import Flask
+from routers.chat import chat_bp
+from routers.image import image_bp
 
-app = FastAPI()
+app = Flask(__name__)
 
-@app.get("/")
-async def root():
-    return {"message": "Welcome to the Nexagen AI API"}
+# Register Blueprints
+app.register_blueprint(chat_bp)
+app.register_blueprint(image_bp)
+
+if __name__ == '__main__':
+    app.run(debug=True)
